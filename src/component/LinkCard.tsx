@@ -9,14 +9,18 @@ interface LinkCardProps {
 
 export const LinkCard: FC<LinkCardProps> = ({ link, onEdit, onDelete }) => (
   <div className="link-card">
-    <h3>{link.title}</h3>
-    <p>{link.description}</p>
-    <a href={link.url} target="_blank" rel="noopener noreferrer">
-      {link.url}
-    </a>
-    <div>
+    <div className="link-info">
+      <a href={link.url} target="_blank" rel="noreferrer">
+        {link.title}
+      </a>
+      <p>{link.description}</p>
+      <span>{link.url}</span>
+    </div>
+    <div className="link-actions">
       <button onClick={onEdit}>Edit</button>
-      <button onClick={onDelete}>Delete</button>
+      <button className="delete" onClick={onDelete}>
+        Delete
+      </button>
     </div>
   </div>
 );

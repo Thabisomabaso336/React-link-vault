@@ -1,60 +1,79 @@
-import React, { useState, FC } from "react";
+import React, { FC, useState, FormEvent } from "react";
 import type { Link } from "./Link";
 
 interface LinkFormProps {
+  initialLink?: Link | null;
   onSave: (link: Link) => void;
   onCancel: () => void;
-  initialLink?: Link;
 }
 
 export const LinkForm: FC<LinkFormProps> = ({
+  initialLink,
   onSave,
   onCancel,
-  initialLink,
 }) => {
   const [title, setTitle] = useState(initialLink?.title || "");
   const [url, setUrl] = useState(initialLink?.url || "");
   const [description, setDescription] = useState(
     initialLink?.description || ""
   );
+  const [isUrlInvalid, setIsUrlInvalid] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSave({
-      id: initialLink?.id, // preserve id if editing
-      title,
-      url,
-      description,
-    });
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      setIsUrlInvalid(true);
+      return;
+    }
+    onSave({ ...initialLink, title, url, description });
+    setTitle("");
+    setUrl("");
+    setDescription("");
+    setIsUrlInvalid(false);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="link-form">
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <input
-        type="url"
-        placeholder="URL"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        required
-      />
-      <textarea
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <div>
-        <button type="submit">Save</button>
-        <button type="button" onClick={onCancel}>
-          Cancel
-        </button>
-      </div>
-    </form>
+    <div className="form-container">
+      <h2>{initialLink ? "Edit Link" : "Add New Link"}</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Title
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          URL
+          <input
+            value={url}
+            onChange={(e) => {
+              setUrl(e.target.value);
+              setIsUrlInvalid(false);
+            }}
+            required
+          />
+          {isUrlInvalid && (
+            <p className="error">Please enter a valid URL (https://...)</p>
+          )}
+        </label>
+        <label>
+          Description
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
+        <div className="form-actions">
+          <button type="submit" className="btn-save">
+            Save
+          </button>
+          <button type="button" className="btn-cancel" onClick={onCancel}>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };

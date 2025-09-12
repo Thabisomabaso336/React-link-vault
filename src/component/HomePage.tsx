@@ -7,9 +7,8 @@ interface HomePageProps {
   userId: string | null;
   isEditing: boolean;
   currentLink: Link | null;
-  isLoading?: boolean;
   filteredLinks: Link[];
-  setIsEditing: (isEditing: boolean) => void;
+  setIsEditing: (editing: boolean) => void;
   setCurrentLink: (link: Link | null) => void;
   handleSave: (link: Link) => void;
   handleCancel: () => void;
@@ -17,11 +16,10 @@ interface HomePageProps {
   deleteLink: (id: string) => void;
 }
 
-const HomePage: FC<HomePageProps> = ({
+export const HomePage: FC<HomePageProps> = ({
   userId,
   isEditing,
   currentLink,
-  isLoading,
   filteredLinks,
   setIsEditing,
   setCurrentLink,
@@ -30,29 +28,27 @@ const HomePage: FC<HomePageProps> = ({
   handleEdit,
   deleteLink,
 }) => (
-  <div className="homepage">
-    {userId && <p>Welcome, {userId}</p>}
-
+  <div className="main">
+    {userId && <p className="user-id">User ID: {userId}</p>}
     <button
+      className="btn-add"
       onClick={() => {
         setIsEditing(true);
         setCurrentLink(null);
       }}
     >
-      ➕ Add New Link
+      Add New Link
     </button>
 
     {isEditing && (
       <LinkForm
+        initialLink={currentLink}
         onSave={handleSave}
         onCancel={handleCancel}
-        initialLink={currentLink || undefined}
       />
     )}
 
-    {isLoading && <p>Loading links...</p>}
-
-    {!isLoading && filteredLinks.length === 0 && <p>No links yet. Add one!</p>}
+    {filteredLinks.length === 0 && <p>No links found. Add one!</p>}
 
     <div className="link-list">
       {filteredLinks.map((link) =>
