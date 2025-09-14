@@ -54,7 +54,7 @@ react-link-vault/
 🛠️ Installation & Setup
 
 Make sure you have Node.js (>=18) installed.
-```
+
 
 Clone the repository:
 git clone https://github.com/your-username/react-link-vault.git
@@ -65,7 +65,6 @@ npm install
 ```
 Run the development server
 npm run dev
-
 ```
 
 📦 Dependencies🧑‍💻 Development Tools
