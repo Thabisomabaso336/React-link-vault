@@ -22,24 +22,39 @@ It allows users to save, search, edit, and delete links, while persisting data u
 📂 Project Structure
 
 react-link-vault/
-│── public/                 # Static assets
+
+│── public/ 
+# Static assets
+
 │── src/
+
 │   ├── component/
-│   │   ├── Navbar.tsx      # Top navigation + search bar
-│   │   ├── HomePage.tsx    # Main page displaying links
-│   │   ├── Footer.tsx      # Footer with contact info & social links
-│   │   ├── Link.ts         # Type definition for Link object
-│   ├── App.tsx             # Main app logic
-│   ├── main.tsx            # React entry point
+
+│   │   ├── Navbar.tsx 
+# Top navigation + search bar
+│   │   ├── HomePage.tsx 
+# Main page displaying links
+│   │   ├── Footer.tsx  
+# Footer with contact info & social links
+│   │   ├── Link.ts  
+# Type definition for Link object
+│   ├── App.tsx   
+# Main app logic
+│   ├── main.tsx 
+# React entry point
 │── package.json
+
 │── tsconfig.json
+
 │── vite.config.ts
+
 │── README.md
 
 ```
 🛠️ Installation & Setup
 
 Make sure you have Node.js (>=18) installed.
+```
 
 Clone the repository:
 git clone https://github.com/your-username/react-link-vault.git
@@ -75,6 +90,7 @@ Vite
 
 TypeScript
  ~5.8.3
+
 
  📜 License
 
