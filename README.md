@@ -75,6 +75,9 @@ Vite React plugin for fast HMR
 
 TypeScript ESLint for type-safe linting
 
+
+https://socialify.git.ci/Thabisomabaso336/React-link-vault/image?language=1&owner=1&name=1&stargazers=1&theme=Light
+
 React
  ^19.1.1
 
